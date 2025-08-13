@@ -1,58 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
-
+/* ComMarília News Portal Design System */
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Core Brand Colors */
+    --background: 248 250 252;
+    --foreground: 15 23 42;
+    
+    /* ComMarília Brand Identity */
+    --primary: 214 90% 52%; /* ComMarília Blue */
+    --primary-foreground: 255 255 255;
+    --primary-glow: 214 90% 65%;
+    
+    /* News Categories */
+    --news-urgent: 0 84% 60%; /* Red for breaking news */
+    --news-urgent-foreground: 255 255 255;
+    --news-economy: 214 90% 52%; /* Blue for economy */
+    --news-city: 142 76% 36%; /* Green for city news */
+    --news-traffic: 25 95% 53%; /* Orange for traffic */
+    --news-obituary: 220 14% 46%; /* Gray for obituaries */
+    
+    /* Interface Elements */
+    --card: 255 255 255;
+    --card-foreground: 15 23 42;
+    --card-border: 226 32% 94%;
+    
+    --secondary: 241 87% 97%;
+    --secondary-foreground: 15 23 42;
+    
+    --muted: 241 87% 97%;
+    --muted-foreground: 100 8% 46%;
+    
+    --accent: 241 87% 97%;
+    --accent-foreground: 15 23 42;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 255 255 255;
+    
+    --border: 226 32% 94%;
+    --input: 226 32% 94%;
+    --ring: 214 90% 52%;
+    
+    /* Design System Tokens */
+    --radius: 12px;
+    --shadow-soft: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --shadow-medium: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-large: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(214 90% 52%), hsl(214 90% 65%));
+    --gradient-category-news: linear-gradient(135deg, hsl(214 90% 52%), hsl(214 90% 65%));
+    --gradient-category-city: linear-gradient(135deg, hsl(142 76% 36%), hsl(142 76% 50%));
+    --gradient-category-traffic: linear-gradient(135deg, hsl(25 95% 53%), hsl(45 93% 58%));
+    --gradient-category-obituary: linear-gradient(135deg, hsl(220 14% 46%), hsl(220 14% 60%));
+    
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-spring: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
 
   .dark {
@@ -100,6 +108,52 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+}
+
+@layer components {
+  /* News Portal Utilities */
+  .news-card {
+    @apply bg-card border border-card-border rounded-xl shadow-[var(--shadow-medium)] hover:shadow-[var(--shadow-large)] transition-[var(--transition-smooth)];
+  }
+  
+  .story-gradient {
+    @apply bg-gradient-to-br from-primary to-primary-glow;
+  }
+  
+  .category-news { background: var(--gradient-category-news); }
+  .category-city { background: var(--gradient-category-city); }
+  .category-traffic { background: var(--gradient-category-traffic); }
+  .category-obituary { background: var(--gradient-category-obituary); }
+  
+  .text-gradient {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .progress-bar-animation {
+    animation: progressFill 5s linear forwards;
+  }
+  
+  @keyframes progressFill {
+    from { width: 0%; }
+    to { width: 100%; }
+  }
+  
+  .modal-backdrop {
+    backdrop-filter: blur(8px);
+    background: rgba(0, 0, 0, 0.6);
   }
 }
